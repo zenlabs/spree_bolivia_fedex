@@ -44,10 +44,10 @@ class Spree::Calculator::CanadaPostExpedited < Spree::Calculator
     order.line_items.each do |i|
       item = {
         :quantity => i.quantity,
-        :weight => 0.100,
-        :length => 1,
-        :width => 1,
-        :height => 1,
+        :weight => i.variant.weight,
+        :length => i.variant.depth,
+        :width => i.variant.width,
+        :height => i.variant.height,
         :description => ' '
       }
       addItem(item)

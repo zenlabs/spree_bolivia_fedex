@@ -44,10 +44,10 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
     order.line_items.each do |i|
       item = {
         :quantity => i.quantity,
-        :weight => 0.75,
-        :length => 3,
-        :width => 1,
-        :height => 8,
+        :weight => i.variant.weight,
+        :length => i.variant.depth,
+        :width => i.variant.width,
+        :height => i.variant.height,
         :description => ' '
       }
       addItem(item)
@@ -77,7 +77,6 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
     # xml.elements['shippingOptions'].elements.each do |t|
     #   result[:options][t.name.to_sym] = t.text
     # end
-    puts result[:products]
     return result[:products][1][:rate]
   end
   
