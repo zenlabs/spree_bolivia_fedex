@@ -2,8 +2,6 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
   require 'net/http'
   require 'rexml/document'
   require 'builder'
-
-  # preference :min_price, :decimal, :default => 10
   
   preference :merchantCPCID, :string, :default => "CPC_DEMO"
   preference :fromPostalCode, :string, :default => "H2L1H4"
@@ -23,6 +21,20 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
   end
   
   def compute(order)
+    case order
+      when Spree::Shipment
+        order = Spree::Order.find(order[:order_id])
+        getRate(order)
+      when Spree::Order
+        if order.item_total != 0
+          getRate(order)
+        end
+    end
+  end
+  
+  private 
+  
+  def getRate(order)
     
     @items = []
     
@@ -72,15 +84,10 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
       end
       result[:products] << product
     end
-    # result[:options] = {}
-    # xml.elements['shippingOptions'].elements.each do |t|
-    #   result[:options][t.name.to_sym] = t.text
-    # end
+    
     rate = result[:products][1][:rate]
     return rate.to_f
   end
-  
-  private 
   
   def prepareXML(merchant, customerInfo)
     xml = ::Builder::XmlMarkup.new
