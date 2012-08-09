@@ -22,7 +22,6 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
     @items << item;
   end
   
-  # as order_or_line_items we always get line items, as calculable we have Coupon, ShippingMethod or ShippingRate
   def compute(order)
     
     @items = []
@@ -31,7 +30,7 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
       :merchantCPCID => self.preferred_merchantCPCID,
       :fromPostalCode => self.preferred_fromPostalCode,
       :turnAroundTime => 24,
-      :itemsPrice => order.total
+      :itemsPrice => order.item_total
     }
     
     customerInfo = {
@@ -77,7 +76,8 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
     # xml.elements['shippingOptions'].elements.each do |t|
     #   result[:options][t.name.to_sym] = t.text
     # end
-    return result[:products][1][:rate]
+    rate = result[:products][1][:rate]
+    return rate.to_f
   end
   
   private 
