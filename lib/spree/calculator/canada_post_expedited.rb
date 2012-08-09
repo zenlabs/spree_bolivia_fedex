@@ -1,4 +1,4 @@
-class Spree::Calculator::CanadaPostRegular < Spree::Calculator
+class Spree::Calculator::CanadaPostExpedited < Spree::Calculator
   require 'net/http'
   require 'rexml/document'
   require 'builder'
