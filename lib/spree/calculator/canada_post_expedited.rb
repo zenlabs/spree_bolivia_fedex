@@ -9,7 +9,7 @@ class Spree::Calculator::CanadaPostExpedited < Spree::Calculator
   attr_accessible :preferred_merchantCPCID, :preferred_fromPostalCode
   
   def self.description
-    "Canada Post (Regular)"
+    "Canada Post (Expedited)"
   end
     
   def self.register
