@@ -31,7 +31,7 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
       :merchantCPCID => self.preferred_merchantCPCID,
       :fromPostalCode => self.preferred_fromPostalCode,
       :turnAroundTime => 24,
-      :itemsPrice => order.item_total
+      :itemsPrice => order.total
     }
     
     customerInfo = {
