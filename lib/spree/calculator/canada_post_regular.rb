@@ -85,7 +85,8 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
       result[:products] << product
     end
     
-    rate = result[:products][1][:rate]
+    result = result[:products].group_by { |i| i[:name] }
+    rate = result['Regular'][0][:rate]
     return rate.to_f
   end
   

@@ -85,7 +85,8 @@ class Spree::Calculator::CanadaPostExpedited < Spree::Calculator
       result[:products] << product
     end
     
-    rate = result[:products][0][:rate]
+    result = result[:products].group_by { |i| i[:name] }
+    rate = result['Expedited'][0][:rate]
     return rate.to_f
   end
   
