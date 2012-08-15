@@ -47,7 +47,7 @@ class Spree::Calculator::CanadaPostExpedited < Spree::Calculator
     
     customerInfo = {
       :city => order.ship_address.city,
-      :provOrState => order.ship_address.state_name,
+      :provOrState => getState(order),
       :country => order.ship_address.country.iso,        
       :postalCode => order.ship_address.zipcode   
     }
@@ -88,6 +88,14 @@ class Spree::Calculator::CanadaPostExpedited < Spree::Calculator
     result = result[:products].group_by { |i| i[:name] }
     rate = result['Expedited'][0][:rate]
     return rate.to_f
+  end
+  
+  def getState(order)
+   if order.ship_address.state_name
+     return order.ship_address.state_name
+   else
+     return order.ship_address.state.name
+   end
   end
   
   def prepareXML(merchant, customerInfo)
