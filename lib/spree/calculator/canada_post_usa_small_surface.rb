@@ -1,4 +1,4 @@
-class Spree::Calculator::CanadaPostRegular < Spree::Calculator
+class Spree::Calculator::CanadaPostUsaSmallSurface < Spree::Calculator
   require 'net/http'
   require 'rexml/document'
   require 'builder'
@@ -10,7 +10,7 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
   attr_accessible :preferred_merchantCPCID, :preferred_fromPostalCode, :preferred_handlingFee
   
   def self.description
-    "Canada Post (Regular)"
+    "Canada Post (USA Small Packets Surface)"
   end
     
   def self.register
@@ -87,8 +87,8 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
     end
     
     result = result[:products].group_by { |i| i[:name] }
-    rate = result['Regular'][0][:rate].to_f + self.preferred_handlingFee.to_f
-    return rate
+    rate = result['Small Packets Surface'][0][:rate].to_f + self.preferred_handlingFee.to_f
+    return rate.to_f
   end
   
   def getState(order)

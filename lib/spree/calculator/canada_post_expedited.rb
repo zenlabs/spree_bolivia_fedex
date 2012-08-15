@@ -5,8 +5,9 @@ class Spree::Calculator::CanadaPostExpedited < Spree::Calculator
   
   preference :merchantCPCID, :string, :default => "CPC_DEMO"
   preference :fromPostalCode, :string, :default => "H2L1H4"
+  preference :handlingFee, :integer, :default => 0
   
-  attr_accessible :preferred_merchantCPCID, :preferred_fromPostalCode
+  attr_accessible :preferred_merchantCPCID, :preferred_fromPostalCode, :preferred_handlingFee
   
   def self.description
     "Canada Post (Expedited)"
@@ -86,7 +87,7 @@ class Spree::Calculator::CanadaPostExpedited < Spree::Calculator
     end
     
     result = result[:products].group_by { |i| i[:name] }
-    rate = result['Expedited'][0][:rate]
+    rate = result['Expedited'][0][:rate].to_f + self.preferred_handlingFee.to_f
     return rate.to_f
   end
   
