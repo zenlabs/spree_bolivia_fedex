@@ -48,7 +48,7 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
     customerInfo = {
       :city => order.ship_address.city,
       :provOrState => order.ship_address.state_name,
-      :country => 'CA',        
+      :country => order.ship_address.country.iso,        
       :postalCode => order.ship_address.zipcode   
     }
     
