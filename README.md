@@ -13,15 +13,13 @@ To play with this extension you'll need your Canada Post API Credentials.
 Notes
 =====
 
-For the moment only 2 Canada shipping methods are availables (Regular, Expedited).
+For the moment only 3 Canada shipping methods are availables (Regular, Expedited and USA Regular).
 I know the code is note perfect, I had to develop this extension really fast... So feel free to help me to improve it ! :)
 
 TODO
 ====
 
 - Add new shippment methods
-- Add USA shippment methods
-- Fix the bug cause by states select input
 - Improve the code
 
 Testing
