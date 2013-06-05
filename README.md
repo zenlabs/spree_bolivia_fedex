@@ -2,7 +2,7 @@ SpreeCanadaPost
 ===============
 
 This extension will allow you to use Canada Post shipment's methods by using their API.
-You'll be able to calculate automaticaly and dynamicly the shipment price.
+You'll be able to calculate automatically and dynamically the shipment price.
 
 
 Requirements
