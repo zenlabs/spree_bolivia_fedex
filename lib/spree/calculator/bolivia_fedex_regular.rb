@@ -1,7 +1,5 @@
-class Spree::Calculator::CanadaPostRegular < Spree::Calculator
+class Spree::Calculator::BoliviaFedexRegular < Spree::Calculator
   require 'net/http'
-  require 'rexml/document'
-  require 'builder'
   
   preference :merchantCPCID, :string, :default => "CPC_DEMO"
   preference :fromPostalCode, :string, :default => "H2L1H4"
@@ -10,7 +8,7 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
   attr_accessible :preferred_merchantCPCID, :preferred_fromPostalCode, :preferred_handlingFee
   
   def self.description
-    "Canada Post (Regular)"
+    "Fedex Bolivia (Normal)"
   end
     
   def self.register
@@ -65,6 +63,8 @@ class Spree::Calculator::CanadaPostRegular < Spree::Calculator
       addItem(item)
     end
     
+    
+  
     url = URI.parse 'http://sellonline.canadapost.ca:30000/'
     request = Net::HTTP::Post.new(url.path)
     request.content_type = 'application/x-www-form-urlencoded'
